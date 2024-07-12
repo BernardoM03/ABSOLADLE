@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ABSOLADLE</title>
+        <link href="styles.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id="header">
+            <img src="" alt="ABSOLADLE">
+        </div>
+        <button type="button" id="start-btn">Start</button>
+        <button type="button" id="start-new-btn">Start New Game</button>
+        <div id="game-area" class="hidden">
+            <label for="text-input">Guess the ABSOLAD</label>
+            <input type="input" list="absolads" id="text-input">
+                <datalist id="absolads">
+                    <option value="nick">Nick</option>
+                    <option value="andy">Andy</option>
+                    <option value="justin">Justin</option>
+                    <option value="trevor">Trevor</option>
+                    <option value="huy">Huy</option>
+                    <option value="bernardo">Bernardo</option>
+                    <option value="raed">Raed</option>
+                    <option value="danny">Danny</option>
+                    <option value="calvin">Calvin</option>
+                    <option value="bao">Bao</option>
+                </datalist>
+            <button type="button" id="guess-btn">Guess</button>
+            <button type="button" id="show-results-btn" class="hidden">Show Results</button>
+            <table id="guess-table">
+                <tr id="legend">
+                    <td>Absolad</td>
+                    <td>Birth Month</td>
+                    <td>Home State</td>
+                    <td>Nationality</td>
+                </tr>
+            </table>
+        </div>
+        <div id="win-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" id="close-btn">&times;</span>
+                <p id="win-msg"></p>
+                <button type="button" id="share-results-btn">Share Results!</button>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
