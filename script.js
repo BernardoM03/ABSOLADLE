@@ -220,7 +220,7 @@ textInput.addEventListener('keypress', function (e) {
 })
 
 const generateResultsString = () => {
-    let resultsString = `ABSOLADLE ${formattedDate}: ${numGuesses}/3\n\n`;
+    let resultsString = `ABSOLADLE ${month}/${day}/${year}: ${numGuesses}/3\n\n`;
     guessData.forEach(person => {
         resultsString += person.name === mysteryAbsolad.name ? '🟩 ' : '🟥 ';
         resultsString += person.birthMonth === mysteryAbsolad.birthMonth ? '🟩 ' : '🟥 ';
