@@ -236,3 +236,4 @@ shareResultsBtn.addEventListener("click", () => {
     navigator.clipboard.writeText(resultsString);
     alert("Results were copied to clipboard!");
 })
+
