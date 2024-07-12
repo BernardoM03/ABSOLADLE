@@ -74,9 +74,11 @@ const closeBtn = document.getElementById("close-btn");
 const shareResultsBtn = document.getElementById("share-results-btn");
 
 const date = new Date();
+const minutes = date.getMinutes();
 const day = date.getDate();
 const month = date.getMonth() + 1;
 const year = date.getFullYear();
+//const formattedDate = `${month}${day}${year}${minutes}`;
 const formattedDate = `${month}${day}${year}`;
 
 let guessData = JSON.parse(localStorage.getItem("data")) || [];
@@ -84,11 +86,12 @@ let gameEnded = JSON.parse(localStorage.getItem("gameEnded")) || "false";
 let storedDate = JSON.parse(localStorage.getItem("storedDate")) || 0; 
 let mysteryAbsolad = {};
 let numGuesses = 0;
-//startNewButton.classList.toggle('hidden');
+startNewButton.classList.toggle('hidden');
 
 
 const clearLocalStorageForNewDay = () => {
     guessData = [];
+    storedDate = 0;
     localStorage.removeItem("data");
     localStorage.removeItem("gameEnded");
     localStorage.removeItem("storedDate");
@@ -104,7 +107,7 @@ const startGame = () => {
     }
 
     startButton.classList.toggle("hidden");
-    startNewButton.classList.toggle("hidden");
+    //startNewButton.classList.toggle("hidden");
     gameArea.classList.toggle("hidden");
 
     mysteryAbsolad = generateRandomAbsolad();
@@ -149,7 +152,7 @@ const checkGuess = (input) => {
 const updateInput = () => {
     // checks if the number of allowed guesses has been exceeded, and if so, end the game.
     // updates the text input placeholder to match situation
-    if (numGuesses >= 3) {
+    if (numGuesses >= 3 && gameEnded != "won") {
         textInput.setAttribute('placeholder', `No more guesses allowed`);
         endGame("lost");
     } else {
@@ -223,7 +226,7 @@ textInput.addEventListener('keypress', function (e) {
 })
 
 const generateResultsString = () => {
-    let resultsString = `ABSOLADLE ${formattedDate}: ${numGuesses}/3\n\n`;
+    let resultsString = `ABSOLADLE ${month}/${day}/${year}: ${numGuesses}/3\n\n`;
     guessData.forEach(person => {
         resultsString += person.name === mysteryAbsolad.name ? '🟩 ' : '🟥 ';
         resultsString += person.birthMonth === mysteryAbsolad.birthMonth ? '🟩 ' : '🟥 ';
