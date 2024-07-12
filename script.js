@@ -1,61 +1,61 @@
 const absolads = [
     {
         name: "bernardo",
-        birthMonth: 11,
+        birthMonth: "november",
         homeState: "oregon",
         nationality: "brazil"
     },
     {
         name: "andy",
-        birthMonth: 7,
+        birthMonth: "july",
         homeState: "arizona",
         nationality: "china"
     },
     {
         name: "nick",
-        birthMonth: 7,
+        birthMonth: "july",
         homeState: "arizona",
         nationality: "brazil"
     },
     {
         name: "huy",
-        birthMonth: 11,
+        birthMonth: "november",
         homeState: "oregon",
         nationality: "vietnam"
     },
     {
         name: "raed",
-        birthMonth: 11,
+        birthMonth: "november",
         homeState: "oregon",
         nationality: "bangladesh"
     },
     {
         name: "justin",
-        birthMonth: 9,
+        birthMonth: "september",
         homeState: "arizona",
         nationality: "korea"
     },
     {
         name: "danny",
-        birthMonth: 5,
+        birthMonth: "may",
         homeState: "oregon",
         nationality: "korea"
     },
     {
         name: "calvin",
-        birthMonth: 11,
+        birthMonth: "november",
         homeState: "nevada",
         nationality: "mix"
     },
     {
         name: "trevor",
-        birthMonth: 11,
+        birthMonth: "november",
         homeState: "arizona",
         nationality: "mix"
     },
     {
         name: "bao",
-        birthMonth: 7,
+        birthMonth: "july",
         homeState: "oregon",
         nationality: "vietnam"
     }
@@ -65,7 +65,6 @@ const startButton = document.getElementById("start-btn");
 const startNewButton = document.getElementById("start-new-btn");
 const gameArea = document.getElementById("game-area");
 const textInput = document.getElementById("text-input");
-const guessButton = document.getElementById("guess-btn");
 const guessTable = document.getElementById("guess-table");
 const showResultsButton = document.getElementById("show-results-btn");
 
@@ -85,6 +84,8 @@ let gameEnded = JSON.parse(localStorage.getItem("gameEnded")) || "false";
 let storedDate = localStorage.getItem("storedDate") || formattedDate; 
 let mysteryAbsolad = {};
 let numGuesses = 0;
+startNewButton.classList.toggle('hidden');
+
 
 const clearLocalStorageForNewDay = () => {
     guessData = [];
@@ -101,7 +102,7 @@ const startGame = () => {
     }
 
     startButton.classList.toggle("hidden");
-    startNewButton.classList.toggle("hidden");
+    //startNewButton.classList.toggle("hidden");
     gameArea.classList.toggle("hidden");
 
     mysteryAbsolad = generateRandomAbsolad();
@@ -118,12 +119,13 @@ const startGame = () => {
 const endGame = (winString) => {
     showResultsButton.classList.toggle("hidden");
     textInput.disabled = true;
-    guessButton.disabled = true;
     gameEnded = winString;
     localStorage.setItem("gameEnded", JSON.stringify(gameEnded));
     //Modal element
     displayModal();
-    winMsg.innerText = winString = "won" ? "yoooo u got it" : "fucking idiot";
+    const message = winString = "won" ? "Congrats!" : "Fucking Idiot...";
+    winMsg.innerText = message;
+    console.log(message);
 }
 
 const displayModal = () => {
@@ -204,15 +206,16 @@ startNewButton.addEventListener("click", () => {
     startGame();
 })
 
-guessButton.addEventListener("click", () => {
-    const userInput = textInput.value.trim().toLowerCase();
-
-    if (!absolads.some(person => person.name === userInput)) {
-        alert("Please input a valid Absolad");
-    } else {
-        checkGuess(userInput);
-        // set the text input to a black box
-        textInput.value = "";
+textInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        const userInput = textInput.value.trim().toLowerCase();
+        if (!absolads.some(person => person.name === userInput)) {
+            alert("Please input a valid Absolad");
+        } else {
+            checkGuess(userInput);
+            // set the text input to a black box
+            textInput.value = "";
+        }
     }
 })
 
