@@ -77,14 +77,14 @@ const date = new Date();
 const day = date.getDate();
 const month = date.getMonth() + 1;
 const year = date.getFullYear();
-const formattedDate = `${day}${month}${year}`;
+const formattedDate = `${month}${day}${year}`;
 
 let guessData = JSON.parse(localStorage.getItem("data")) || [];
 let gameEnded = JSON.parse(localStorage.getItem("gameEnded")) || "false";
-let storedDate = localStorage.getItem("storedDate") || formattedDate; 
+let storedDate = JSON.parse(localStorage.getItem("storedDate")) || 0; 
 let mysteryAbsolad = {};
 let numGuesses = 0;
-startNewButton.classList.toggle('hidden');
+//startNewButton.classList.toggle('hidden');
 
 
 const clearLocalStorageForNewDay = () => {
@@ -97,12 +97,14 @@ const clearLocalStorageForNewDay = () => {
 }
 
 const startGame = () => {
+    console.log(storedDate);
+    console.log(formattedDate);
     if(storedDate !== formattedDate) {
         clearLocalStorageForNewDay();
     }
 
     startButton.classList.toggle("hidden");
-    //startNewButton.classList.toggle("hidden");
+    startNewButton.classList.toggle("hidden");
     gameArea.classList.toggle("hidden");
 
     mysteryAbsolad = generateRandomAbsolad();
@@ -138,6 +140,7 @@ const checkGuess = (input) => {
     addRow(guessedPerson);
     guessData.push(guessedPerson);
     localStorage.setItem("data", JSON.stringify(guessData));
+    localStorage.setItem("storedDate", JSON.stringify(formattedDate));
     //console.log(JSON.stringify(guessData));
     if (guessedPerson === mysteryAbsolad) endGame("won");
     updateInput();
@@ -220,7 +223,7 @@ textInput.addEventListener('keypress', function (e) {
 })
 
 const generateResultsString = () => {
-    let resultsString = `ABSOLADLE ${month}/${day}/${year}: ${numGuesses}/3\n\n`;
+    let resultsString = `ABSOLADLE ${formattedDate}: ${numGuesses}/3\n\n`;
     guessData.forEach(person => {
         resultsString += person.name === mysteryAbsolad.name ? '🟩 ' : '🟥 ';
         resultsString += person.birthMonth === mysteryAbsolad.birthMonth ? '🟩 ' : '🟥 ';
