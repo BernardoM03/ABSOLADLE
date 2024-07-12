@@ -7,12 +7,12 @@
         <link href="styles.css" rel="stylesheet"/>
     </head>
     <body>
-        <div id="header">
-            <img src="" alt="ABSOLADLE">
+        <h1>ABSOLADLE</h1>
+        <div class="start-game">
+            <button type="button" id="start-btn" class="start-game">Start</button>
+            <button type="button" id="start-new-btn" class="start-game">Start New Game</button>
         </div>
-        <button type="button" id="start-btn">Start</button>
-        <button type="button" id="start-new-btn">Start New Game</button>
-        <div id="game-area" class="hidden">
+        <div id="game-area" class="hidden game-area">
             <label for="text-input">Guess the ABSOLAD</label>
             <input type="input" list="absolads" id="text-input">
                 <datalist id="absolads">
@@ -27,8 +27,7 @@
                     <option value="calvin">Calvin</option>
                     <option value="bao">Bao</option>
                 </datalist>
-            <button type="button" id="guess-btn">Guess</button>
-            <button type="button" id="show-results-btn" class="hidden">Show Results</button>
+            <button type="button" id="show-results-btn" class="result-btn hidden">Show Results</button>
             <table id="guess-table">
                 <tr id="legend">
                     <td>Absolad</td>
@@ -41,10 +40,11 @@
         <div id="win-modal" class="modal hidden">
             <div class="modal-content">
                 <span class="close-btn" id="close-btn">&times;</span>
-                <p id="win-msg"></p>
-                <button type="button" id="share-results-btn">Share Results!</button>
+                <p id="win-msg" class="win-msg">statement here</p>
+                <button type="button" id="share-results-btn" class="share-btn">Share Results!</button>
             </div>
         </div>
+        <footer>ABSOLADLE in progress - https://www.youtube.com/@absolads5741</footer>
         <script src="./script.js"></script>
     </body>
 </html>
